@@ -58,7 +58,7 @@
   <div class="controls">
     <label class="sl">sites d<input id="d" type="range" min="2" max="30" value="4"><b id="vd">4</b></label>
     <label class="sl">phase step φ<input id="phi" type="range" min="0" max="3.1416" step="0.005" value="1.5708"><b id="vphi">π/2</b></label>
-    <div><button type="button" id="star">ψ* (φ = π/2)</button> <button type="button" id="rand">↻ random state</button></div>
+    <div><button type="button" id="star">max current (φ = π/2)</button> <button type="button" id="rand">↻ random state</button></div>
   </div>
 
   <div class="grid">
@@ -74,7 +74,7 @@
   </div>
 
   <p class="note">The state is <code>ψ<sub>j</sub> ∝ sin((j+1)π/(d+1)) e<sup>−ijφ</sup></code>; at φ = π/2 it is the
-    maximal-tension state ψ* of NRS, where the efficiency is exactly <code>1/C<sub>Nava</sub>(d)² = cos² θ<sub>NRS</sub>(d)</code>:
+    maximal current state of NRS, where the efficiency is exactly <code>1/C<sub>Nava</sub>(d)² = cos² θ<sub>NRS</sub>(d)</code>:
     1 at d = 2, 3 and strictly below from d = 4 on (D41 in
     <a href="https://github.com/naype888-cloud/nava-robertson-schrodinger">nava-robertson-schrodinger</a>).
     The bound itself is <code>CramerRao.fisher_le_qfi</code>, from Robertson (<code>CramerRao.robertson</code>) —

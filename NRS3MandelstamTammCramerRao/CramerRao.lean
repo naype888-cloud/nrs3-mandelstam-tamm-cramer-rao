@@ -18,7 +18,7 @@ Robertson's inequality `|⟨[H, X]⟩|² ≤ 4 Var H · Var X` is exactly `F_X �
 Everything holds for symmetric operators on any complex inner product space, in particular on
 `H_d = ℂ^d`. On the path pair `T_d : P_d` of NRS³ the ratio `F_X / F_Q` at the maximal-tension
 state is `1 / C_Nava(d)²`, equal to `1` only at `d = 2, 3` (`GroupVelocity.cramerRao`,
-`GroupVelocity.mtRatio_psiStar`, repository `nava-robertson-schrodinger`, `D41`).
+`GroupVelocity.mtRatio_maxCurrentState`, repository `nava-robertson-schrodinger`, `D41`).
 
 ## Main results
 

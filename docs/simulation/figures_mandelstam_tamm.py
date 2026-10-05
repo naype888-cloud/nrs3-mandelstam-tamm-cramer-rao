@@ -62,7 +62,7 @@ def fig_mandelstam_tamm():
             label="d = 2, 3: saturated")
     bx.set_ylim(0.74, 1.03)
     bx.set_xlabel("sites per axis  d")
-    bx.set_ylabel("⟨K⟩² / (4 Var T · Var P)  at ψ*")
+    bx.set_ylabel("⟨K⟩² / (4 Var T · Var P)  at the maximal current state")
     bx.legend(loc="center right", fontsize=9)
     bx.set_title("NRS³: the ratio is 1/C_Nava(d)²", loc="left", fontsize=11.5)
 

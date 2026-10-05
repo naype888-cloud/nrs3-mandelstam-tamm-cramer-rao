@@ -32,7 +32,7 @@ def fig_cramer_rao():
             label="d = 2, 3: Cramér–Rao saturated")
     ax.set_ylim(0.74, 1.03)
     ax.set_xlabel("sites per axis  d")
-    ax.set_ylabel("efficiency  F_P / F_Q  at ψ*")
+    ax.set_ylabel("efficiency  F_P / F_Q  at the maximal current state")
     ax.legend(loc="center right", fontsize=9)
     ax.set_title("NRS³: the efficiency is 1/C_Nava(d)²", loc="left", fontsize=11.5)
 

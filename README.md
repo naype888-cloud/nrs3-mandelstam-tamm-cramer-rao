@@ -29,7 +29,7 @@ the arrows `p_k e^{−iE_k t}`; its tip never enters the disc of radius `cos(ΔE
 
 On the NRS³ pair `T_d : P_d` the same inequality bounds the speed of `⟨P_d⟩` by the spread of
 transport, and at the maximal-tension state the ratio is `1 / C_Nava(d)²`: equality only at
-`d = 2, 3` (`GroupVelocity.mandelstamTamm`, `GroupVelocity.mtRatio_psiStar`, `D41` in the base
+`d = 2, 3` (`GroupVelocity.mandelstamTamm`, `GroupVelocity.mtRatio_maxCurrentState`, `D41` in the base
 repository). Right panel of the figure; the values there are numerical.
 
 ### History
@@ -57,7 +57,7 @@ the quantum Fisher information of a pure state, taken here as its definition.
 On NRS³ the parameter is imprinted by transport `T_d` and read with position `P_d`. At the
 maximal-tension state the efficiency `F_P / F_Q` is `1 / C_Nava(d)²`: exactly `1` at `d = 2, 3`
 and strictly below from `d = 4` on, towards `1/(π²/3 − 2) ≈ 0.775` (`GroupVelocity.cramerRao`,
-`GroupVelocity.mtRatio_psiStar`, `D41` in the base repository). At `d = 4` it is
+`GroupVelocity.mtRatio_maxCurrentState`, `D41` in the base repository). At `d = 4` it is
 `5 / (99 − 42√5) ≈ 0.9833`.
 
 ### History
