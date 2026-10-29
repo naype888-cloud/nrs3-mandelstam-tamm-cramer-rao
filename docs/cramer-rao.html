@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cramér–Rao on NRS³</title>
+<title>Cramér–Rao on RS^N³</title>
 <meta name="description" content="How much of the quantum Fisher information 4 Var T can position P read? Turn the phase of the state and watch the fluctuation vectors.">
 <style>
   :root { --bg: #fcfcfb; --panel: #fff; --ink: #0b0b0b; --ink2: #52514e; --muted: #8a8985;
@@ -74,7 +74,7 @@
   </div>
 
   <p class="note">The state is <code>ψ<sub>j</sub> ∝ sin((j+1)π/(d+1)) e<sup>−ijφ</sup></code>; at φ = π/2 it is the
-    maximal current state of NRS, where the efficiency is exactly <code>1/C<sub>Nava</sub>(d)² = cos² θ<sub>NRS</sub>(d)</code>:
+    maximal current state of RS^N, where the efficiency is exactly <code>1/C<sub>N</sub>(d)² = cos² θ<sub>RS^N</sub>(d)</code>:
     1 at d = 2, 3 and strictly below from d = 4 on (D41 in
     <a href="https://github.com/naype888-cloud/nava-robertson-schrodinger">nava-robertson-schrodinger</a>).
     The bound itself is <code>CramerRao.fisher_le_qfi</code>, from Robertson (<code>CramerRao.robertson</code>) —

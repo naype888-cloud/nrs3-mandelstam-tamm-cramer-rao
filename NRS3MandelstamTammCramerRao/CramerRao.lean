@@ -16,8 +16,8 @@ A pure state `ψ` imprinted with a parameter `θ` by `e^{−iθH}` is estimated 
 Robertson's inequality `|⟨[H, X]⟩|² ≤ 4 Var H · Var X` is exactly `F_X ≤ F_Q`.
 
 Everything holds for symmetric operators on any complex inner product space, in particular on
-`H_d = ℂ^d`. On the path pair `T_d : P_d` of NRS³ the ratio `F_X / F_Q` at the maximal-tension
-state is `1 / C_Nava(d)²`, equal to `1` only at `d = 2, 3` (`GroupVelocity.cramerRao`,
+`H_d = ℂ^d`. On the path pair `T_d : P_d` of RS^N³ the ratio `F_X / F_Q` at the maximal-tension
+state is `1 / C_N(d)²`, equal to `1` only at `d = 2, 3` (`GroupVelocity.cramerRao`,
 `GroupVelocity.mtRatio_maxCurrentState`, repository `nava-robertson-schrodinger`, `D41`).
 
 ## Main results
