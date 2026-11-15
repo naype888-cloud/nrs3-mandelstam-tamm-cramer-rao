@@ -118,7 +118,6 @@ Les prolongements thématiques spécialisés sont maintenus dans leurs dépôts 
 | [**RS^N et RS^N³ — théorème de base**](https://github.com/naype888-cloud/nava-robertson-schrodinger) | La structure canonique du cube ouvert et la saturation en dimension d ≤ 3 |
 | [**Physlib: PRs fusionnées**](https://github.com/leanprover-community/physlib/pulls?q=is%3Apr+is%3Amerged+author%3Anaype888-cloud) | L'ensemble des résultats de la chaîne et du cube intégrés en amont |
 | [`nrs3-hopf`](https://github.com/naype888-cloud/nrs3-hopf) | Fibration de Hopf S³ → S² et géométrie spinorielle |
-| [`nrs3-tritoro`](https://github.com/naype888-cloud/nrs3-tritoro) | Formalisme sur le tri-tore périodique fermé T³ = x × y × z |
 | [`nrs3-landauer-carnot`](https://github.com/naype888-cloud/nrs3-landauer-carnot) | Coût de dissipation thermodynamique et limite de Carnot |
 | [`nrs3-de-sitter`](https://github.com/naype888-cloud/nrs3-de-sitter) | Entropie d'horizon et paramètre de courbure |
 | [`nrs3-penrose`](https://github.com/naype888-cloud/nrs3-penrose) | Temps caractéristique de réduction d'état |
