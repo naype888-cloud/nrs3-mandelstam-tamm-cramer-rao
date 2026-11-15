@@ -1,127 +1,194 @@
-# RS^N³ · Mandelstam–Tamm and Cramér–Rao
+<div align="center">
 
-Two faces of one inequality, in Lean 4. **No quantum state becomes orthogonal to itself before
-`πħ / (2ΔE)`** (Mandelstam–Tamm, sharp constant), and **no measurement extracts more information
-about a phase than `4 Var H`** (quantum Cramér–Rao). Both come from Robertson's inequality with the
-energy spread `ΔE`: one bounds how fast a state moves, the other how well that motion can be read.
+# RS^N³ · Mandelstam–Tamm et Cramér–Rao
+### Deux visages de l'incertitude quantique : vitesse d'évolution et borne d'estimation de phase
 
-**[▶ Try it: move the time and watch the phasors](https://naype888-cloud.github.io/nrs3-mandelstam-tamm-cramer-rao/)** ·
-**[▶ Try it: turn the phase and watch δT and δP](https://naype888-cloud.github.io/nrs3-mandelstam-tamm-cramer-rao/cramer-rao.html)**
+**Eduardo Nava Hernández**  
+*Vérification formelle certifiée en Lean 4 · 0 sorry · Physlib (PhyslibAlpha)*
 
-![RS^N³ · Mandelstam–Tamm](docs/figures/mandelstam_tamm_sharp.png)
+[![Lean 4](https://img.shields.io/badge/Lean_4-v4.34.0-blue.svg?style=flat-square)](https://leanprover.github.io/)
+[![Mathlib](https://img.shields.io/badge/Mathlib-vérifié-2ea44f.svg?style=flat-square)](https://github.com/leanprover-community/mathlib4)
+[![Kernel Status](https://img.shields.io/badge/Kernel-0%20sorry%20%7C%20ZFC-brightgreen.svg?style=flat-square)]()
+[![Physlib](https://img.shields.io/badge/Physlib-PRs%20Fusionnées-brightgreen.svg?style=flat-square)](https://github.com/leanprover-community/physlib/pulls?q=is%3Apr+is%3Amerged+author%3Anaype888-cloud)
+[![Simulateur de Phase](https://img.shields.io/badge/Simulateur-Phasors_MT-00e5ff.svg?style=for-the-badge&logo=three.js)](https://naype888-cloud.github.io/nrs3-mandelstam-tamm-cramer-rao/)
+[![Simulateur Cramér-Rao](https://img.shields.io/badge/Simulateur-Cramér_Rao-8a2be2.svg?style=for-the-badge)](https://naype888-cloud.github.io/nrs3-mandelstam-tamm-cramer-rao/cramer-rao.html)
 
-## Mandelstam–Tamm
+</div>
 
-| Statement | Lean |
-|---|---|
-| `‖A(t)‖ ≥ cos(ΔE t)` while `ΔE t ≤ π/2`, for every finite spectrum | `cos_le_norm_amplitude` |
-| orthogonality forces `ΔE t ≥ π/2` | `orthogonality_time` |
-| two equal branches meet it with equality: `π/2` is sharp | `norm_amplitude_half_eq_cos` |
-| on `H_d = ℂ^d`: the Schrödinger evolution of a self-adjoint `H` has exactly this amplitude | `hasDerivAt_evolve`, `inner_evolve` |
-| the bound on `ℂ^d` | `cos_le_norm_inner_evolve` |
+---
 
-`A(t) = ⟨ψ, e^{−iHt/ħ}ψ⟩` is the survival amplitude and `ΔE` the energy spread. It is the sum of
-the arrows `p_k e^{−iE_k t}`; its tip never enters the disc of radius `cos(ΔE t)`:
+> ### 🏛️ Deux visages d'une même inégalité géométrique
+>
+> Deux conséquences fondamentales de l'inégalité de Robertson gouvernent l'évolution temporelle et la métrologie quantique :
+>
+> <div align="center">
+> <img src="assets/plaque_mt_cr_protagoniste.png" alt="Plaque Mandelstam-Tamm et Cramér-Rao" width="860">
+> </div>
+>
+> **1 · Borne de vitesse de Mandelstam–Tamm (1945).** Aucun état quantique ne peut devenir orthogonal à son état initial avant le temps caractéristique τ_ortho ≥ πħ / (2ΔE), la constante π/2 étant géométriquement exacte et optimale.
+>
+> **2 · Borne d'estimation de phase de Cramér–Rao.** Aucune mesure de position ou d'observable X ne peut extraire plus d'information sur un paramètre de translation que l'information quantique de Fisher F_Q = 4 Var(H).
+>
+> **3 · La paire canonique transport-position (T_d, P_d).** Sur le déplacement spatial élémentaire, le paramètre est encodé par le transport T_d et lu par la position P_d. À tension maximale, le ratio d'efficacité est exactement égal à 1 / C_N(d)².
+>
+> **4 · Saturation en d ≤ 3 et limite de Szegő.** L'efficacité d'estimation atteint 100% si et seulement si d ≤ 3 (C_N = 1). Dès d ≥ 4, l'efficacité décroît strictement vers la borne asymptotique de Szegő 1 / (π²/3 − 2) ≈ 0.775.
 
-![Phasors](docs/figures/mandelstam_tamm_phasors.png)
+---
 
-### In RS^N³
+## 🌐 Cadre géométrique : le transport spatial comme générateur élémentaire
 
-On the RS^N³ pair `T_d : P_d` the same inequality bounds the speed of `⟨P_d⟩` by the spread of
-transport, and at the maximal-tension state the ratio is `1 / C_N(d)²`: equality only at
-`d = 2, 3` (`GroupVelocity.mandelstamTamm`, `GroupVelocity.mtRatio_maxCurrentState`, `D41` in the base
-repository). Right panel of the figure; the values there are numerical.
+Dans tout espace normé euclidien, la séparation entre deux états est une distance métrique unidimensionnelle. Pour relier ces états, la dynamique exige nécessairement un opérateur de translation le long de cet axe de séparation.
 
-### History
+La paire canonique (T_d, P_d) ne constitue pas une abstraction combinatoire de graphe : elle est **la définition géométrique élémentaire de la translation et de la position spatiales**, échantillonnée à résolution finie d sur le segment [−1, 1].
 
-Mandelstam and Tamm (1945) derived the bound from Robertson's inequality for the energy and the
-projector on the initial state. The proof here follows that route: `P = ‖A‖²` obeys
-`P' ≥ −2ΔE √(P(1 − P))`, and a fencing argument against `cos²` gives the sharp constant.
+Lorsque l'on étudie la vitesse de déplacement ou la précision d'estimation d'un paramètre spatial :
+* Mandelstam–Tamm borne la vitesse maximale à laquelle un état peut évoluer vers l'orthogonalité par sa dispersion de transport ΔE.
+* Cramér–Rao borne la sensibilité avec laquelle l'observable de position P_d résout la translation générée par T_d.
+* L'efficacité relative F_P / F_Q coïncide identiquement avec l'inverse du carré de la constante d'incertitude dimensionnelle : 1 / C_N(d)².
 
-## Cramér–Rao
+---
 
-![RS^N³ · Cramér–Rao](docs/figures/cramer_rao_nrs3.png)
+## ⚡ Résumé formel
 
-| Statement | Lean |
-|---|---|
-| `⟪δA, δB⟫ − ⟪δB, δA⟫ = ⟨[A, B]⟩` | `inner_dev_sub` |
-| Robertson: `‖⟨[A, B]⟩‖² ≤ 4 Var A · Var B` | `robertson` |
-| Cramér–Rao: `F_X = ‖⟨[H, X]⟩‖² / Var X ≤ F_Q = 4 Var H` | `fisher_le_qfi` |
+Ce dépôt formalise les deux théorèmes fondamentaux de la dynamique et de la métrologie quantiques sur espaces de Hilbert généraux et sur ℂ^d :
 
-For symmetric operators on any complex inner product space, in particular `ℂ^d`. `F_X` is the
-error-propagation Fisher information of reading `θ` with `X` after `e^{−iθH}`; `F_Q = 4 Var H` is
-the quantum Fisher information of a pure state, taken here as its definition.
+* L'amplitude de survie A(t) et le temps minimal d'orthogonalité sont établis dans [`NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean`](NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean) (`cos_le_norm_amplitude`, `orthogonality_time`).
+* Le cas d'égalité stricte pour deux branches d'énergie égale et la dynamique finie de Schrödinger sont certifiés dans [`NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean`](NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean) (`norm_amplitude_half_eq_cos`, `cos_le_norm_inner_evolve`).
+* L'identité de Robertson pour commutateurs et covariances est démontrée dans [`NRS3MandelstamTammCramerRao/CramerRao.lean`](NRS3MandelstamTammCramerRao/CramerRao.lean) (`robertson`, `inner_dev_sub`).
+* La borne quantique de Cramér–Rao pour toute observable symétrique est formalisée dans [`NRS3MandelstamTammCramerRao/CramerRao.lean`](NRS3MandelstamTammCramerRao/CramerRao.lean) (`fisher_le_qfi`).
 
-### In RS^N³
+---
 
-On RS^N³ the parameter is imprinted by transport `T_d` and read with position `P_d`. At the
-maximal-tension state the efficiency `F_P / F_Q` is `1 / C_N(d)²`: exactly `1` at `d = 2, 3`
-and strictly below from `d = 4` on, towards `1/(π²/3 − 2) ≈ 0.775` (`GroupVelocity.cramerRao`,
-`GroupVelocity.mtRatio_maxCurrentState`, `D41` in the base repository). At `d = 4` it is
-`5 / (99 − 42√5) ≈ 0.9833`.
+## 📐 Démonstration constructive en quatre étapes
 
-### History
+### Étape 1 : Amplitude de survie et borne géométrique de Mandelstam–Tamm
 
-Helstrom (1967) and Braunstein–Caves (1994). The identity `d⟨X⟩/dθ = ⟨i[H, X]⟩` that turns
-Robertson into an estimation bound is the Heisenberg equation; on `T_d : P_d` it is `D38` of the
-base repository, and it is not re-proved here.
+> **Proposition 1.1 (Borne de l'amplitude de survie).** Pour tout état quantique de dispersion d'énergie ΔE sur un spectre fini, la norme de l'amplitude de survie A(t) satisfait ‖A(t)‖ ≥ cos(ΔE t) tant que ΔE t ≤ π/2.
 
-## Build
+*Module formel (amplitude) :* [`NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean`](NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean) (`amplitude`, `cos_le_norm_amplitude`).  
+*Module formel (orthogonalité) :* [`NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean`](NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean) (`orthogonality_time`).
 
-Lean 4 `v4.34.0`, Mathlib `v4.34.0`, nothing else.
+L'amplitude de survie A(t) = ⟨ψ, e^{−iHt/ħ}ψ⟩ représente la somme des phaseurs pondérés p_k e^{−iE_k t}. Son extrémité ne pénètre jamais le disque ouvert de rayon cos(ΔE t). L'orthogonalité A(t) = 0 exige donc impérativement ΔE t ≥ π/2.
+
+---
+
+### Étape 2 : Optimalité de la borne et évolution sur ℂ^d
+
+> **Proposition 2.1 (Caractère exact de la constante π/2).** Un système à deux composantes d'énergies symétriques sature exactement l'inégalité : ‖A(t)‖ = |cos(ΔE t)|.
+
+*Module formel (optimalité) :* [`NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean`](NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean) (`norm_amplitude_half_eq_cos`).  
+*Module formel (dimension finie) :* [`NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean`](NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean) (`hasDerivAt_evolve`, `inner_evolve`, `cos_le_norm_inner_evolve`).
+
+---
+
+### Étape 3 : Inégalité de Robertson et estimation de phase
+
+> **Proposition 3.1 (Formulation hilbertienne de Robertson).** Pour tout couple d'opérateurs symétriques A et B sur un espace préhilbertien complexe, le produit des variances majore le carré de la valeur moyenne du commutateur : ‖⟨[A, B]⟩‖² ≤ 4 Var(A) Var(B).
+
+*Module formel (Robertson) :* [`NRS3MandelstamTammCramerRao/CramerRao.lean`](NRS3MandelstamTammCramerRao/CramerRao.lean) (`expect`, `dev`, `var`, `commExpect`, `inner_dev_sub`, `robertson`).
+
+---
+
+### Étape 4 : Borne d'information de Cramér–Rao et efficacité sur (T_d, P_d)
+
+> **Proposition 4.1 (Information de Fisher et borne quantique).** L'information de Fisher d'estimation de phase F_X = ‖⟨[H, X]⟩‖² / Var(X) ne dépasse jamais l'information quantique de Fisher intrinsèque de l'état F_Q = 4 Var(H).
+
+*Module formel (Cramér-Rao) :* [`NRS3MandelstamTammCramerRao/CramerRao.lean`](NRS3MandelstamTammCramerRao/CramerRao.lean) (`fisher`, `qfi`, `fisher_le_qfi`).  
+*Physlib :* PR #1711, PR #1739.
+
+Sur la paire transport-position (T_d, P_d), l'efficacité F_P / F_Q vaut exactement 1 / C_N(d)². Elle atteint 100% à d = 2, 3 (saturation géométrique tridimensionnelle) et décroît dès d ≥ 4 vers la limite asymptotique de Szegő.
+
+---
+
+## 🔬 Tableau des contributions Physlib fusionnées
+
+| PR Physlib | Fichier amont (`PhyslibAlpha/…`) | Énoncé formel principal | Objet physique | Statut |
+|:---:|:---|:---|:---:|:---:|
+| **#1711** | `TightBindingChain/MandelstamTamm` | Borne de vitesse \|⟨J⟩\| ≤ 2 ΔH ΔX et borne ⟨J⟩²/Var X ≤ 4 Var H | Mandelstam–Tamm & Cramér–Rao | **MERGED** |
+| **#1739** | `TightBindingChain/MandelstamTammMaxCurrent` | Réflection exacte du ratio d'efficacité 1/C_N² sur l'état maximal | Saturation d ≤ 3 et limite Szegő | **MERGED** |
+
+---
+
+## 🏛️ Le Mosaïque des développements satellites
+
+Les prolongements thématiques spécialisés sont maintenus dans leurs dépôts respectifs, chacun doté de sa propre suite de preuves Lean 4 :
+
+| Dépôt | Thématique et objet central |
+|:---|:---|
+| [**RS^N et RS^N³ — théorème de base**](https://github.com/naype888-cloud/nava-robertson-schrodinger) | La structure canonique du cube ouvert et la saturation en dimension d ≤ 3 |
+| [**Physlib: PRs fusionnées**](https://github.com/leanprover-community/physlib/pulls?q=is%3Apr+is%3Amerged+author%3Anaype888-cloud) | L'ensemble des résultats de la chaîne et du cube intégrés en amont |
+| [`nrs3-hopf`](https://github.com/naype888-cloud/nrs3-hopf) | Fibration de Hopf S³ → S² et géométrie spinorielle |
+| [`nrs3-tritoro`](https://github.com/naype888-cloud/nrs3-tritoro) | Formalisme sur le tri-tore périodique fermé T³ = x × y × z |
+| [`nrs3-landauer-carnot`](https://github.com/naype888-cloud/nrs3-landauer-carnot) | Coût de dissipation thermodynamique et limite de Carnot |
+| [`nrs3-de-sitter`](https://github.com/naype888-cloud/nrs3-de-sitter) | Entropie d'horizon et paramètre de courbure |
+| [`nrs3-penrose`](https://github.com/naype888-cloud/nrs3-penrose) | Temps caractéristique de réduction d'état |
+| [`nrs3-pauli-dirac`](https://github.com/naype888-cloud/nrs3-pauli-dirac) | Matrices de spin de Pauli et représentations de Clifford |
+| [`nrs3-uncertainty-cone`](https://github.com/naype888-cloud/nrs3-uncertainty-cone) | Géométrie de Minkowski induite par la matrice de Gram |
+| [`nrs3-poincare`](https://github.com/naype888-cloud/nrs3-poincare) | Quantification discrète selon Poincaré (1912) |
+| [`nrs3-defect-curvature`](https://github.com/naype888-cloud/nrs3-defect-curvature) | Quanta de courbure sur surfaces de Riemann fermées |
+| [`nrs3-rovelli-lqg`](https://github.com/naype888-cloud/nrs3-rovelli-lqg) | Spectre d'aire et géométrie quantique de boucles |
+| [`nrs3-dark`](https://github.com/naype888-cloud/nrs3-dark) | Part non résolue par la lumière et fraction volumétrique |
+| [`nrs3-cube`](https://github.com/naype888-cloud/nrs3-cube) | Le cube ouvert multidimensionnel généralisé |
+
+---
+
+## ⏱️ Chronologie historique (1911–1945)
+
+La formalisation résout avec les outils de la théorie des opérateurs une problématique issue de l'ère Solvay :
+
+| Année | Événement historique | Dépôt associé |
+|:---:|:---|:---:|
+| **1911** | Premier congrès Solvay : radiation et quanta | — |
+| **1911–12** | Poincaré : la loi de Planck impose des niveaux discrets | [`nrs3-poincare`](https://github.com/naype888-cloud/nrs3-poincare) |
+| **1915–20** | Szegő : théorèmes limites pour matrices de Toeplitz | [Dépôt de base (`D8`)](https://github.com/naype888-cloud/nava-robertson-schrodinger) |
+| **1925–27** | Pauli : principe d'exclusion et matrices de spin | [`nrs3-pauli-dirac`](https://github.com/naype888-cloud/nrs3-pauli-dirac) |
+| **1927** | Relations d'incertitude de Heisenberg | — |
+| **1928** | Dirac : matrices gamma 4 × 4 | [`nrs3-pauli-dirac`](https://github.com/naype888-cloud/nrs3-pauli-dirac) |
+| **1929** | van der Waerden : spineurs et représentations de Lorentz | [`nrs3-uncertainty-cone`](https://github.com/naype888-cloud/nrs3-uncertainty-cone) |
+| **1929–30** | Robertson et Schrödinger : inégalité avec terme de covariance | [Dépôt de base (`D2`)](https://github.com/naype888-cloud/nava-robertson-schrodinger) |
+| **1934** | Robertson : déterminant d'indétermination multi-observables | [Dépôt de base (`D49`)](https://github.com/naype888-cloud/nava-robertson-schrodinger) |
+| **1945–46** | Mandelstam et Tamm : borne temps-énergie quantique ; Rao (1945), Cramér (1946) | **[`nrs3-mandelstam-tamm-cramer-rao`](https://github.com/naype888-cloud/nrs3-mandelstam-tamm-cramer-rao)** (ce dépôt) |
+
+---
+
+## 🛠️ Reproduction et vérification formelle en Lean 4
+
+Pour compiler et vérifier l'ensemble des modules formels de ce dépôt :
 
 ```bash
-lake exe cache get
+# Vérification formelle directe des théorèmes
+lake env lean NRS3MandelstamTammCramerRao.lean
+
+# Compilation complète du paquet
 lake build
-lake env lean Verification/Axioms.lean   # only propext, Classical.choice, Quot.sound
+
+# Vérification des axiomes
+lake env lean Verification/Axioms.lean
 ```
 
-Every file: no `sorry`, lines of at most 100 characters, English headers.
+### Base axiomatique standard
 
-## Timeline 1911–1945
+Tous les théorèmes compilent strictement sous les axiomes standards de ZFC reconnus par le noyau de Lean 4 et Mathlib :
 
-RS^N answers a question of the Solvay era with later tools. The series is placed in that window:
-what falls inside it is the history the theorem belongs to; what falls after it is a proposal,
-not part of RS^N³.
+```text
+[propext, Classical.choice, Quot.sound]
+```
 
-| Year | Event | Repository |
-|---|---|---|
-| 1911 | First Solvay conference: radiation and the quanta | |
-| 1911–12 | Poincaré: Planck's law forces discrete levels | [`nrs3-poincare`](https://github.com/naype888-cloud/nrs3-poincare) |
-| 1915–20 | Szegő: limit theorems for Toeplitz matrices (the limit `C_N^∞`, `D8`) | [base repository (RS^N, RS^N³)](https://github.com/naype888-cloud/nava-robertson-schrodinger) |
-| 1917–27 | Einstein and de Sitter: `Λ` and the empty universe; Friedmann and Lemaître: the expanding universe | [`nrs3-de-sitter`](https://github.com/naype888-cloud/nrs3-de-sitter) |
-| 1925–27 | Pauli: exclusion, shells `2n²`, spin matrices | [`nrs3-pauli-dirac`](https://github.com/naype888-cloud/nrs3-pauli-dirac) |
-| 1927 | Heisenberg's relation; fifth Solvay conference: electrons and photons | |
-| 1928 | Dirac: the `4 × 4` gamma matrices | [`nrs3-pauli-dirac`](https://github.com/naype888-cloud/nrs3-pauli-dirac) |
-| 1929 | van der Waerden: spinors, `SL(2, ℂ)` on Hermitian matrices; the uncertainty cone | [`nrs3-uncertainty-cone`](https://github.com/naype888-cloud/nrs3-uncertainty-cone) |
-| **1929–30** | **Robertson and Schrödinger: the uncertainty inequality** | **[base repository (RS^N, RS^N³)](https://github.com/naype888-cloud/nava-robertson-schrodinger)** |
-| 1945–46 | Mandelstam–Tamm: the time–energy bound; Rao (1945), Cramér (1946) | **[`nrs3-mandelstam-tamm-cramer-rao`](https://github.com/naype888-cloud/nrs3-mandelstam-tamm-cramer-rao)** (this one) |
+* **0 `sorry`** dans l'intégralité des modules de Mandelstam–Tamm et Cramér–Rao.
+* Aucun axiome additionnel non vérifié.
 
-**Tools from after the window.** Niven (1956: rational values of the trigonometric functions),
-Fiedler (1973: algebraic connectivity), Lean 4 and Mathlib (the verification). The question is
-of 1929; the tools are later; the checking is of 2026.
+---
 
-**After the window: proposals, not RS^N³.** [`nrs3-penrose`](https://github.com/naype888-cloud/nrs3-penrose) (Penrose 1996, gravity-related
-collapse) and [`nrs3-rovelli-lqg`](https://github.com/naype888-cloud/nrs3-rovelli-lqg) (loop quantum gravity, area spectrum 1995). They use RS^N³ results
-but their physical readings belong to quantum information and quantum gravity.
-[`nrs3-defect-curvature`](https://github.com/naype888-cloud/nrs3-defect-curvature) restates base theorems (`D16`–`D16i`); its Bekenstein–Hawking (1973–75) reading
-is a declared bridge.
+## 📜 Licence
 
-## The mosaic
+[NRS Noncommercial License 1.0.0](LICENSE) — Libre pour tout usage non commercial, académique et humanitaire, ainsi que pour intégration dans des bibliothèques ouvertes de vérification formelle (Mathlib, Physlib, Lean 4). Voir [LICENSE](LICENSE) pour toute utilisation commerciale.
 
-- [RS^N and RS^N³ — the base theorem](https://github.com/naype888-cloud/nava-robertson-schrodinger)
-- **[RS^N³ · Mandelstam–Tamm and Cramér–Rao](https://github.com/naype888-cloud/nrs3-mandelstam-tamm-cramer-rao)** (this one)
-- [RS^N³ · Landauer and Carnot](https://github.com/naype888-cloud/nrs3-landauer-carnot)
-- [RS^N³ · de Sitter](https://github.com/naype888-cloud/nrs3-de-sitter)
-- [RS^N³ · Penrose](https://github.com/naype888-cloud/nrs3-penrose) (proposal)
-- [RS^N³ · Pauli–Dirac](https://github.com/naype888-cloud/nrs3-pauli-dirac)
-- [RS^N³ · The uncertainty cone](https://github.com/naype888-cloud/nrs3-uncertainty-cone)
-- [RS^N³ · Poincaré](https://github.com/naype888-cloud/nrs3-poincare)
-- [RS^N³ · Defect and curvature](https://github.com/naype888-cloud/nrs3-defect-curvature)
-- [RS^N³ · Rovelli — Loop Quantum Gravity](https://github.com/naype888-cloud/nrs3-rovelli-lqg) (proposal)
-- [RS^N³ · Dark](https://github.com/naype888-cloud/nrs3-dark)
-- [RS^N³ · Cristales](https://github.com/naype888-cloud/nrs3-cristales) (español)
+---
 
-## License
+<div align="center">
 
-NRS Noncommercial License 1.0.0, see [`LICENSE`](LICENSE). Author: Eduardo Nava-Hernandez.
+### 📐 *« Le temps d'orthogonalité est borné par πħ / (2ΔE) et l'information d'estimation par 4 Var(H) : deux faces de la même incertitude géométrique. »*
+
+**Eduardo Nava Hernández** · [naype888-cloud](https://github.com/naype888-cloud)
+
+</div>
