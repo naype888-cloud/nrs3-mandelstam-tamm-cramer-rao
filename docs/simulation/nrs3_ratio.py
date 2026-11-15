@@ -2,7 +2,7 @@
 
 T_d is the path adjacency over ρ_d = 2 cos(π/(d + 1)), P_d the centred position with unit
 spacing 2/(d − 1) (nava-robertson-schrodinger, D3). the maximal current state is the top eigenvector of K = i[T_d, P_d]
-(maximal tension). The ratio ⟨K⟩² / (4 Var T · Var P) at the maximal current state is 1/C_Nava(d)² (Lean, D41).
+(maximal tension). The ratio ⟨K⟩² / (4 Var T · Var P) at the maximal current state is 1/C_N(d)² (Lean, D41).
 """
 
 import numpy as np

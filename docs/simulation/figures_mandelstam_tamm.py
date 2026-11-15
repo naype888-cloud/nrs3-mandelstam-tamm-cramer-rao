@@ -5,7 +5,7 @@ Writes docs/figures/mandelstam_tamm_sharp.png.
 Left: survival amplitudes |A(t)| against ΔE·t (ħ = 1) for random finite spectra (numerical)
 and two equal branches (exact), above the Lean bound cos(ΔE t) up to π/2; the weaker bound
 1 − (ΔE t)²/2 is shown for comparison. Right: on T_d : P_d the Mandelstam–Tamm ratio
-⟨K⟩² / (4 Var T · Var P) at the maximal-tension state is 1/C_Nava(d)² (Lean, D41 in
+⟨K⟩² / (4 Var T · Var P) at the maximal-tension state is 1/C_N(d)² (Lean, D41 in
 nava-robertson-schrodinger; values here numerical).
 
 Run:  python3 docs/simulation/figures_mandelstam_tamm.py
@@ -64,7 +64,7 @@ def fig_mandelstam_tamm():
     bx.set_xlabel("sites per axis  d")
     bx.set_ylabel("⟨K⟩² / (4 Var T · Var P)  at the maximal current state")
     bx.legend(loc="center right", fontsize=9)
-    bx.set_title("NRS³: the ratio is 1/C_Nava(d)²", loc="left", fontsize=11.5)
+    bx.set_title("NRS³: the ratio is 1/C_N(d)²", loc="left", fontsize=11.5)
 
     fig.suptitle("Mandelstam–Tamm 1945 on H_d = ℂ^d and on NRS³", x=0.01, ha="left",
                  fontsize=13, color=INK)

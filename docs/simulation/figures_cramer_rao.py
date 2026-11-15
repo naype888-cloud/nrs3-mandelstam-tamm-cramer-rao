@@ -3,7 +3,7 @@
 Writes docs/figures/cramer_rao_nrs3.png.
 
 Left: on T_d : P_d the parameter is imprinted by e^{−iθT_d} and read with P_d; at the
-maximal-tension state the efficiency F_P / F_Q equals 1/C_Nava(d)²: 1 at d = 2, 3, below 1 from
+maximal-tension state the efficiency F_P / F_Q equals 1/C_N(d)²: 1 at d = 2, 3, below 1 from
 d = 4 on, towards 1/C∞² = 1/(π²/3 − 2) (Lean: D41 in nava-robertson-schrodinger; values here
 numerical). Right: random states of d = 4 under the Lean bound F_X ≤ F_Q (numerical).
 
@@ -34,7 +34,7 @@ def fig_cramer_rao():
     ax.set_xlabel("sites per axis  d")
     ax.set_ylabel("efficiency  F_P / F_Q  at the maximal current state")
     ax.legend(loc="center right", fontsize=9)
-    ax.set_title("NRS³: the efficiency is 1/C_Nava(d)²", loc="left", fontsize=11.5)
+    ax.set_title("NRS³: the efficiency is 1/C_N(d)²", loc="left", fontsize=11.5)
 
     rng = np.random.default_rng(4)
     t, p = ops(4)
