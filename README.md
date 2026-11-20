@@ -65,7 +65,9 @@ Ce dépôt formalise les deux théorèmes fondamentaux de la dynamique et de la 
 
 > **Proposition 1.1 (Borne de l'amplitude de survie).** Pour tout état quantique de dispersion d'énergie ΔE sur un spectre fini, la norme de l'amplitude de survie A(t) satisfait ‖A(t)‖ ≥ cos(ΔE t) tant que ΔE t ≤ π/2.
 
-*Module formel (amplitude) :* [`NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean`](NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean) (`amplitude`, `cos_le_norm_amplitude`).  
+<div align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_mt_etape1.png"><img src="assets/claro/plaque_mt_etape1.png" alt="A(t) = somme des p_k e^(−i E_k t), ΔE ; cos(ΔE t) ≤ ‖A(t)‖ tant que ΔE t ≤ π/2 ; A(t) = 0 impose π/2 ≤ ΔE t" width="860"></picture></div>
+
+*Module formel (amplitude) :* [`NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean`](NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean) (`amplitude`, `spread`, `neg_le_inner_deriv`, `cos_le_norm_amplitude`).  
 *Module formel (orthogonalité) :* [`NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean`](NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean) (`orthogonality_time`).
 
 L'amplitude de survie A(t) = ⟨ψ, e^{−iHt/ħ}ψ⟩ représente la somme des phaseurs pondérés p_k e^{−iE_k t}. Son extrémité ne pénètre jamais le disque ouvert de rayon cos(ΔE t). L'orthogonalité A(t) = 0 exige donc impérativement ΔE t ≥ π/2.
@@ -76,7 +78,9 @@ L'amplitude de survie A(t) = ⟨ψ, e^{−iHt/ħ}ψ⟩ représente la somme des 
 
 > **Proposition 2.1 (Caractère exact de la constante π/2).** Un système à deux composantes d'énergies symétriques sature exactement l'inégalité : ‖A(t)‖ = |cos(ΔE t)|.
 
-*Module formel (optimalité) :* [`NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean`](NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean) (`norm_amplitude_half_eq_cos`).  
+<div align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_mt_etape2.png"><img src="assets/claro/plaque_mt_etape2.png" alt="Deux branches égales : ‖A(t)‖ = cos(ΔE t), π/2 exacte ; évolution de Schrödinger sur ℂ^d et cos(ΔE t) ≤ |⟨ψ, ψ(t)⟩|" width="860"></picture></div>
+
+*Module formel (optimalité) :* [`NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean`](NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean) (`spread_half`, `norm_amplitude_half`, `norm_amplitude_half_eq_cos`).  
 *Module formel (dimension finie) :* [`NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean`](NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean) (`hasDerivAt_evolve`, `inner_evolve`, `cos_le_norm_inner_evolve`).
 
 ---
@@ -85,6 +89,8 @@ L'amplitude de survie A(t) = ⟨ψ, e^{−iHt/ħ}ψ⟩ représente la somme des 
 
 > **Proposition 3.1 (Formulation hilbertienne de Robertson).** Pour tout couple d'opérateurs symétriques A et B sur un espace préhilbertien complexe, le produit des variances majore le carré de la valeur moyenne du commutateur : ‖⟨[A, B]⟩‖² ≤ 4 Var(A) Var(B).
 
+<div align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_mt_etape3.png"><img src="assets/claro/plaque_mt_etape3.png" alt="Robertson : ⟨δA, δB⟩ − ⟨δB, δA⟩ = ⟨[A, B]⟩ et ‖⟨[A, B]⟩‖² ≤ 4 Var A · Var B" width="860"></picture></div>
+
 *Module formel (Robertson) :* [`NRS3MandelstamTammCramerRao/CramerRao.lean`](NRS3MandelstamTammCramerRao/CramerRao.lean) (`expect`, `dev`, `var`, `commExpect`, `inner_dev_sub`, `robertson`).
 
 ---
@@ -92,6 +98,8 @@ L'amplitude de survie A(t) = ⟨ψ, e^{−iHt/ħ}ψ⟩ représente la somme des 
 ### Étape 4 : Borne d'information de Cramér–Rao et efficacité sur (T_d, P_d)
 
 > **Proposition 4.1 (Information de Fisher et borne quantique).** L'information de Fisher d'estimation de phase F_X = ‖⟨[H, X]⟩‖² / Var(X) ne dépasse jamais l'information quantique de Fisher intrinsèque de l'état F_Q = 4 Var(H).
+
+<div align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_mt_etape4.png"><img src="assets/claro/plaque_mt_etape4.png" alt="Cramér–Rao : F_X ≤ F_Q = 4 Var H ; sur (T_d, P_d), F_P / F_Q = 1 / C_N(d)², égal à 1 pour d = 2, 3" width="860"></picture></div>
 
 *Module formel (Cramér-Rao) :* [`NRS3MandelstamTammCramerRao/CramerRao.lean`](NRS3MandelstamTammCramerRao/CramerRao.lean) (`fisher`, `qfi`, `fisher_le_qfi`).  
 *Physlib :* PR #1711, PR #1739.
