@@ -22,7 +22,7 @@
 > Deux conséquences fondamentales de l'inégalité de Robertson gouvernent l'évolution temporelle et la métrologie quantique :
 >
 > <div align="center">
-> <img src="assets/plaque_mt_cr_protagoniste.png" alt="Plaque Mandelstam-Tamm et Cramér-Rao" width="860">
+> <picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_mt_cr_protagoniste.png"><img src="assets/claro/plaque_mt_cr_protagoniste.png" alt="Plaque Mandelstam-Tamm et Cramér-Rao" width="860"></picture>
 > </div>
 >
 > **1 · Borne de vitesse de Mandelstam–Tamm (1945).** Aucun état quantique ne peut devenir orthogonal à son état initial avant le temps caractéristique τ_ortho ≥ πħ / (2ΔE), la constante π/2 étant géométriquement exacte et optimale.
