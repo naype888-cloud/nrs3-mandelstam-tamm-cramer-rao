@@ -55,6 +55,8 @@ Lorsque l'on étudie la vitesse de déplacement ou la précision d'estimation d'
 
 ## ⚡ Résumé formel
 
+*Convention : les modules Lean posent ħ = 1 ; les formules affichées restituent ħ (τ_ortho ≥ πħ / (2ΔE)). Les bornes en cos(ΔE t) valent pour 0 ≤ t et ΔE t ≤ π/2.*
+
 Ce dépôt formalise les deux théorèmes fondamentaux de la dynamique et de la métrologie quantiques sur espaces de Hilbert généraux et sur ℂ^d :
 
 * L'amplitude de survie A(t) et le temps minimal d'orthogonalité sont établis dans [`NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean`](NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean) (`cos_le_norm_amplitude`, `orthogonality_time`).
@@ -136,7 +138,7 @@ Sur la paire transport-position (T_d, P_d), l'efficacité F_P / F_Q vaut exactem
 | [`MandelstamTamm1945.lean`](NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean) | `cos_le_norm_inner_evolve` | Évolution de Schrödinger finie sur ℂ^d | 0 |
 | [`CramerRao.lean`](NRS3MandelstamTammCramerRao/CramerRao.lean) | `robertson` | Inégalité de Robertson ‖⟨[A, B]⟩‖² ≤ 4 Var(A) Var(B) sur espaces préhilbertiens | 0 |
 | [`CramerRao.lean`](NRS3MandelstamTammCramerRao/CramerRao.lean) | `fisher_le_qfi` | Borne quantique de Cramér–Rao F_X ≤ F_Q = 4 Var(H) | 0 |
-| [`Verification/Axioms.lean`](Verification/Axioms.lean) | `NRS3MandelstamTammCramerRao_standardAxioms` | Compilation sous les seuls axiomes standards ZFC [propext, Classical.choice, Quot.sound] | 0 |
+| [`Verification/Axioms.lean`](Verification/Axioms.lean) | `#print axioms` | Les sept théorèmes ci-dessus dépendent des seuls axiomes standards de Lean [propext, Classical.choice, Quot.sound] | 0 |
 
 ---
 
