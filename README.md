@@ -66,6 +66,10 @@ Ce dépôt formalise les deux théorèmes fondamentaux de la dynamique et de la 
 
 ## 📐 Démonstration constructive en quatre étapes
 
+<div align="center">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_mt_etapes.png"><img src="assets/claro/plaque_mt_etapes.png" alt="L'échelle déductive en quatre étapes : de Mandelstam–Tamm à la saturation" width="860"></picture>
+</div>
+
 ### Étape 1 : Amplitude de survie et borne géométrique de Mandelstam–Tamm
 
 > **Proposition 1.1 (Borne de l'amplitude de survie).** Pour tout état quantique de dispersion d'énergie ΔE sur un spectre fini, la norme de l'amplitude de survie A(t) satisfait ‖A(t)‖ ≥ cos(ΔE t) tant que ΔE t ≤ π/2.
