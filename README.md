@@ -13,6 +13,11 @@
 [![Simulateur de Phase](https://img.shields.io/badge/Simulateur-Phasors_MT-00e5ff.svg?style=for-the-badge&logo=three.js)](https://naype888-cloud.github.io/nrs3-mandelstam-tamm-cramer-rao/)
 [![Simulateur Cramér-Rao](https://img.shields.io/badge/Simulateur-Cramér_Rao-8a2be2.svg?style=for-the-badge)](https://naype888-cloud.github.io/nrs3-mandelstam-tamm-cramer-rao/cramer-rao.html)
 
+<br>
+
+**[▶ Simulateur de Phase (Phaseurs MT)](https://naype888-cloud.github.io/nrs3-mandelstam-tamm-cramer-rao/)** · **[▶ Simulateur Cramér–Rao](https://naype888-cloud.github.io/nrs3-mandelstam-tamm-cramer-rao/cramer-rao.html)**
+
+
 </div>
 
 ---
@@ -117,25 +122,34 @@ Sur la paire transport-position (T_d, P_d), l'efficacité F_P / F_Q vaut exactem
 
 ---
 
-## 🏛️ Le Mosaïque des développements satellites
+## 📚 Catalogue des modules Lean
 
-Les prolongements thématiques spécialisés sont maintenus dans leurs dépôts respectifs, chacun doté de sa propre suite de preuves Lean 4 :
+| Module | Théorème principal | Signification formelle | `sorry` |
+|:---|:---|:---|:---:|
+| [`MandelstamTamm1945.lean`](NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean) | `cos_le_norm_amplitude` | Borne géométrique de Mandelstam–Tamm ‖A(t)‖ ≥ cos(ΔE t) | 0 |
+| [`MandelstamTamm1945.lean`](NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean) | `orthogonality_time` | Temps minimal d'orthogonalité τ_ortho ≥ πħ / (2ΔE) avec constante π/2 exacte | 0 |
+| [`MandelstamTamm1945.lean`](NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean) | `norm_amplitude_half_eq_cos` | Optimalité et saturation exacte de π/2 sur deux branches symétriques | 0 |
+| [`MandelstamTamm1945.lean`](NRS3MandelstamTammCramerRao/MandelstamTamm1945.lean) | `cos_le_norm_inner_evolve` | Évolution de Schrödinger finie sur ℂ^d | 0 |
+| [`CramerRao.lean`](NRS3MandelstamTammCramerRao/CramerRao.lean) | `robertson` | Inégalité de Robertson ‖⟨[A, B]⟩‖² ≤ 4 Var(A) Var(B) sur espaces préhilbertiens | 0 |
+| [`CramerRao.lean`](NRS3MandelstamTammCramerRao/CramerRao.lean) | `fisher_le_qfi` | Borne quantique de Cramér–Rao F_X ≤ F_Q = 4 Var(H) | 0 |
+| [`Verification/Axioms.lean`](Verification/Axioms.lean) | `NRS3MandelstamTammCramerRao_standardAxioms` | Compilation sous les seuls axiomes standards ZFC [propext, Classical.choice, Quot.sound] | 0 |
 
-| Dépôt | Thématique et objet central |
+---
+
+## 🏛️ La mosaïque des dépôts
+
+| Dépôt | Objet |
 |:---|:---|
-| [**RS^N et RS^N³ — théorème de base**](https://github.com/naype888-cloud/nava-robertson-schrodinger) | La structure canonique du cube ouvert et la saturation en dimension d ≤ 3 |
-| [**Physlib: PRs fusionnées**](https://github.com/leanprover-community/physlib/pulls?q=is%3Apr+is%3Amerged+author%3Anaype888-cloud) | L'ensemble des résultats de la chaîne et du cube intégrés en amont |
-| [`nrs3-hopf`](https://github.com/naype888-cloud/nrs3-hopf) | Fibration de Hopf S³ → S² et géométrie spinorielle |
-| [`nrs3-landauer-carnot`](https://github.com/naype888-cloud/nrs3-landauer-carnot) | Coût de dissipation thermodynamique et limite de Carnot |
-| [`nrs3-de-sitter`](https://github.com/naype888-cloud/nrs3-de-sitter) | Entropie d'horizon et paramètre de courbure |
-| [`nrs3-penrose`](https://github.com/naype888-cloud/nrs3-penrose) | Temps caractéristique de réduction d'état |
-| [`nrs3-pauli-dirac`](https://github.com/naype888-cloud/nrs3-pauli-dirac) | Matrices de spin de Pauli et représentations de Clifford |
-| [`nrs3-uncertainty-cone`](https://github.com/naype888-cloud/nrs3-uncertainty-cone) | Géométrie de Minkowski induite par la matrice de Gram |
-| [`nrs3-poincare`](https://github.com/naype888-cloud/nrs3-poincare) | Quantification discrète selon Poincaré (1912) |
-| [`nrs3-defect-curvature`](https://github.com/naype888-cloud/nrs3-defect-curvature) | Quanta de courbure sur surfaces de Riemann fermées |
-| [`nrs3-rovelli-lqg`](https://github.com/naype888-cloud/nrs3-rovelli-lqg) | Spectre d'aire et géométrie quantique de boucles |
-| [`nrs3-dark`](https://github.com/naype888-cloud/nrs3-dark) | Part non résolue par la lumière et fraction volumétrique |
-| [`nrs3-cube`](https://github.com/naype888-cloud/nrs3-cube) | Le cube ouvert multidimensionnel généralisé |
+| [`lean4-commits`](https://github.com/naype888-cloud/lean4-commits) | Les PRs Lean 4 fusionnées et ouvertes dans Physlib |
+| [`nava-robertson-schrodinger`](https://github.com/naype888-cloud/nava-robertson-schrodinger) | Le canon : l'incertitude élémentaire dimensionnelle sur le cube ouvert |
+| [`Proper-Time-General-Relativity`](https://github.com/naype888-cloud/Proper-Time-General-Relativity) | Le temps compte les pas à quatre sites |
+| [`nrs3-golab`](https://github.com/naype888-cloud/nrs3-golab) | Gołąb : π = 3 (hexagone), 4 (carré) ; stabilité en d = 3 |
+| [`nrs3-tightbinding`](https://github.com/naype888-cloud/nrs3-tightbinding) | La chaîne de Physlib, le cube ouvert et la table périodique |
+| [`nrs3-cristales`](https://github.com/naype888-cloud/nrs3-cristales) | Cristaux : forme par la symétrie, taille par le spectre |
+| [`YM-By-Perelmans-surgery-method`](https://github.com/naype888-cloud/YM-By-Perelmans-surgery-method) | Yang–Mills Spectral Mass Gap |
+| [`nrs3-completude`](https://github.com/naype888-cloud/nrs3-completude) | Complétude constructive par Robertson–Fiedler–Niven–Szegő |
+| [**nrs3-mandelstam-tamm-cramer-rao**](https://github.com/naype888-cloud/nrs3-mandelstam-tamm-cramer-rao) | Vitesse d'évolution et borne d'estimation de phase (ce dépôt) |
+| [`bacqm-systems`](https://github.com/naype888-cloud/bacqm-systems) | Dynamique de mémoire invariante d'échelle |
 
 ---
 
